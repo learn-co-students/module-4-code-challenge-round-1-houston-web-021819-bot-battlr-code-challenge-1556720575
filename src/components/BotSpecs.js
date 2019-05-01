@@ -5,7 +5,7 @@ const BotSpecs = props => {
 
   let botType;
 
-  switch (bot.bot_class) {
+  switch (props.bot_class) {
     case "Assault":
       botType = <i className="icon large circular military" />;
       break;
@@ -27,17 +27,17 @@ const BotSpecs = props => {
             <img
               alt="oh no!"
               className="ui medium circular image bordered"
-              src={bot.avatar_url}
+              src={props.avatar_url}
             />
           </div>
           <div className="four wide column">
-            <h2>Name: {bot.name}</h2>
+            <h2>Name: {props.name}</h2>
             <p>
               <strong>Catchphrase: </strong>
-              {bot.catchphrase}
+              {props.catchphrase}
             </p>
             <strong>
-              Class: {bot.bot_class} {botType}
+              Class: {props.bot_class} {botType}
             </strong>
             <br />
             <div className="ui segment">
@@ -45,15 +45,15 @@ const BotSpecs = props => {
                 <div className="row">
                   <div className="column">
                     <i className="icon large circular red heartbeat" />
-                    <strong>{bot.health}</strong>
+                    <strong>{props.health}</strong>
                   </div>
                   <div className="column">
                     <i className="icon large circular yellow lightning" />
-                    <strong>{bot.damage}</strong>
+                    <strong>{props.damage}</strong>
                   </div>
                   <div className="column">
                     <i className="icon large circular blue shield" />
-                    <strong>{bot.armor}</strong>
+                    <strong>{props.armor}</strong>
                   </div>
                 </div>
               </div>
@@ -61,7 +61,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                console.log('connect this to a function that shows all bots')
+                props.handleGoBackClick(null)
               }
             >
               Go Back
@@ -69,9 +69,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
+                props.handleEnlistButtonClick(props)
               }
             >
               Enlist
