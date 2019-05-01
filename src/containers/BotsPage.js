@@ -3,11 +3,11 @@ import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
 
   state = {
     bots: [],
-    ownedBots: []
+    ownedBots: [],
+    isFiltered: false
   }
 
   fetchBots(){
@@ -22,8 +22,11 @@ class BotsPage extends React.Component {
     this.fetchBots()
   }
 
+  filter = () => {
+    this.setState({isFiltered: !this.state.isFiltered})
+  }
+
   handleClick = (e) =>{
-    // console.log(e.target.id)
     if (this.state.bots.find(bot => parseInt(e.target.id) === bot.id)){
       const clickedBot = this.state.bots.find(bot => parseInt(e.target.id) === bot.id)
       this.setState({bots: this.state.bots.filter(bot => bot.id !== parseInt(e.target.id)),
@@ -34,13 +37,16 @@ class BotsPage extends React.Component {
         ownedBots: this.state.ownedBots.filter(bot => bot.id !== parseInt(e.target.id))})
     }
   }
-  
+
   render() {
-    // console.log(this.state.bots.sort((a, b) => (a.id > b.id) ? 1 : -1))
+    console.log(this.state.isFiltered)
     return (
       <div>
-        {<YourBotArmy bots={this.state.ownedBots.sort((a, b) => (a.id > b.id) ? 1 : -1)} handleClick={this.handleClick}/>}
-        {<BotCollection bots={this.state.bots.sort((a, b) => (a.id > b.id) ? 1 : -1)} handleClick={this.handleClick}/>}
+        <form>
+          <input type="checkbox" id="badassFilter" onClick={this.filter}></input><h4>Badass Filter (limit to bots with attack >80)</h4>
+        </form>
+        {<YourBotArmy bots={this.state.ownedBots.sort((a, b) => (a.id > b.id) ? 1 : -1)} handleClick={this.handleClick} filtered={this.state.filterd} />}
+        {<BotCollection bots={this.state.bots.sort((a, b) => (a.id > b.id) ? 1 : -1)} handleClick={this.handleClick} filtered={this.state.filtered} />}
       </div>
     );
   }
