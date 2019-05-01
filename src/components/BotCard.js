@@ -1,6 +1,9 @@
 import React from "react";
 
 const BotCard = props => {
+  //settting a state variable for this functional component using hooks
+  //const [selected, setSelected] = useState(false);
+  // 
   const { bot } = props;
 
   let botType;
@@ -24,7 +27,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={() => props.botDecision()}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
