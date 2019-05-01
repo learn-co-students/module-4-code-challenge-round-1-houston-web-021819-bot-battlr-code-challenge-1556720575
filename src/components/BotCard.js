@@ -55,8 +55,7 @@ const BotCard = props => {
         </div>
       </div>
     </div>
-  );
+  )
+}
 
-};
-
-export default BotCard;
+export default BotCard

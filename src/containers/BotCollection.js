@@ -1,11 +1,13 @@
 import React from "react";
 import BotCard from "../components/BotCard"
 import BotSpecs from "../components/BotSpecs"
+import SortBar from "../components/SortBar"
 
 class BotCollection extends React.Component {
 
   state = {
-    selectedBot: {}
+    selectedBot: {},
+    sort: ""
   }
 
   showSpecs = (id) => {
@@ -21,22 +23,35 @@ class BotCollection extends React.Component {
     })
   }
 
+  handleChange = (e) => {
+    const newSort = e.target.name
+    this.setState({ sort: newSort })
+  }
+
+  sortBots = () => {
+    const bots = [...this.props.bots]
+    if (!this.state.sort) {
+      return bots
+    } else {
+      return bots.sort((a,b) => a[this.state.sort] < b[this.state.sort] ? 1 : -1)
+    }
+  }
+
   render(){
-    console.log(!Object.keys(this.state.selectedBot).length)
+    console.log(this.state)
   	return (
   	  <div className="ui four column grid">
     		<div className="row">
+          { !Object.keys(this.state.selectedBot).length ? <SortBar sort={this.state.sort} handleChange={this.handleChange}/> : null}
     		  {
             !Object.keys(this.state.selectedBot).length
-            ? this.props.bots.map(bot => <BotCard {...bot} key={bot.id} handleClick={this.showSpecs}/>)
+            ? this.sortBots().map(bot => <BotCard {...bot} key={bot.id} handleClick={this.showSpecs}/>)
             : <BotSpecs {...this.state.selectedBot} key={this.state.selectedBot.id} goBack={this.goBack} enlist={this.props.enlist} />
           }
-    		  Collection of all bots
     		</div>
   	  </div>
-  	);
+  	)
   }
-
-};
+}
 
 export default BotCollection;
