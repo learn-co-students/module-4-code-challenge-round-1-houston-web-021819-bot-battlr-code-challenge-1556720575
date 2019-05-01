@@ -1,13 +1,15 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
     bots: [],
-    owned: false
+    owned: false,
+    visible: false
   }
 
   componentDidMount() {
@@ -22,15 +24,21 @@ class BotsPage extends React.Component {
   }
 
   toggleBots = (id) => {
+    // console.log("i'm clicked")
     this.setState({
       bots: this.state.bots.map( bot => {
         if(bot.id === id){
-          return { ...bot,
-          owned: !bot.owned }
+          return {...bot}
         } else {
           return bot
         }
       })
+    })
+  }
+
+  toggleDisplay = () => {
+    this.setState({
+      visible: true
     })
   }
 
@@ -43,7 +51,11 @@ class BotsPage extends React.Component {
       <div>
         {/* put your components here */}
         <YourBotArmy ownedBots={ownedBots} toggleBots={this.toggleBots}/>
-        <BotCollection unownedBots={unownedBots} toggleBots={this.toggleBots}/>
+  
+      { !this.state.visible ? 
+        <BotCollection unownedBots={unownedBots} toggleBots={this.toggleBots}/> :
+        <BotSpecs toggleBots={this.toggleBots}/>
+      }
       </div>
     );
   }
