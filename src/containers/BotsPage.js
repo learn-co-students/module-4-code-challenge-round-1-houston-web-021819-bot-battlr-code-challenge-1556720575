@@ -6,7 +6,8 @@ class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
     bots:[],
-    myBots:[]
+    myBots:[],
+    viewBot:[]
   }
   
   componentDidMount(){
@@ -25,13 +26,20 @@ class BotsPage extends React.Component {
  
   addToArmy = (id) =>{
     let findBot =  this.state.bots.filter(bot => bot.id == id)[0]
-    this.state.myBots.push(findBot)    
+    this.state.myBots.push(findBot)
+    /*    trying to work on remove part
+    this.state.myBots.indexOf(findBot) !== -1 
+    this.state.myBots.slice()
+    */
+    //this.state.myBots.includes(findBot) 
     this.setState({
       myBots: this.state.myBots.filter((bot, index) => this.state.myBots.indexOf(bot) == index) //no duplicate
     })
-
   }
-
+  
+  viewBot = () =>{
+    console.log('you reached me')
+  }
 
   render() {
     //console.log(this.state.myBots)
