@@ -13,3 +13,12 @@ class App extends Component {
 }
 
 export default App;
+
+/*
+  App
+   -- BotsPage
+     -BotCollection   (container components)
+        .BotCard /.BotSpecs  (presentational components)
+     -YourBotArmy   (container components()
+        .BotCard 
+*/
