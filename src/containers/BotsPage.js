@@ -12,14 +12,24 @@ class BotsPage extends React.Component {
     searchType: ''
   }
 
-  handleFilterAndSearch = () => {
+  handleFilterChange = (e) => {
+    this.setState({
+      ...this.state,
+      filterType: e.target.value
+    })
+  }
+
+  handleSearchChange = (e) => {
+    this.setState({
+      ...this.state,
+      searchType: e.target.value
+    })
+  }
+
+  botFilterAndSearch = () => {
     let botFilter;
     switch(this.state.filterType){
       case "":
-        this.setState({
-          ...this.state,
-          bots: this.state.bots
-        })
         botFilter = this.state.bots
         break;
       case "Defender":
@@ -33,6 +43,7 @@ class BotsPage extends React.Component {
         break;
     }
 
+    botFilter = botFilter.filter(bot => bot.name.includes(this.state.searchType))
     return botFilter
   }
 
@@ -75,8 +86,21 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <YourBotArmy bots={this.handleFilterAndSearch()} handleButtonClick={this.handleBotClick} handleClick={this.handleSpecClick} />
-        {this.state.specClick ? <BotSpecs {...this.state.specClick} handleEnlistButtonClick={this.handleBotClick} handleGoBackClick={this.handleSpecClick} /> : <BotCollection bots={this.state.bots} handleClick={this.handleSpecClick} />}
+        <div>
+          <label>Bot Type:</label>
+          <select onChange={this.handleFilterChange}>
+            <option value="" />
+            <option value="Defender">Defender</option>
+            <option value="Support">Support</option>
+            <option value="Assault">Assault</option>
+          </select>
+
+          <label>Search by Name:</label>
+          <input type = "text" onChange={this.handleSearchChange} />
+
+        </div>
+        <YourBotArmy bots={this.botFilterAndSearch()} handleButtonClick={this.handleBotClick} handleClick={this.handleSpecClick} />
+        {this.state.specClick ? <BotSpecs {...this.state.specClick} handleEnlistButtonClick={this.handleBotClick} handleGoBackClick={this.handleSpecClick} /> : <BotCollection bots={this.botFilterAndSearch()} handleClick={this.handleSpecClick} />}
       </div>
     );
   }
