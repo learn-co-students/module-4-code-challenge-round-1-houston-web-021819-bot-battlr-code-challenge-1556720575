@@ -1,7 +1,7 @@
 import React from "react";
 
 const BotSpecs = props => {
-  let { bot } = props;
+  let  bot  = props;
 
   let botType;
 
