@@ -23,34 +23,34 @@ const BotCard = props => {
     <div className="ui column">
       <div
         className="ui card"
-        key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
-      >
+        key={props.bot.id}
+        onClick={() => props.shiftBot(props.bot.id)}>
+      
         <div className="image">
-          <img alt="oh no!" src={bot.avatar_url} />
+          <img alt="oh no!" src={props.bot.avatar_url} />
         </div>
         <div className="content">
           <div className="header">
-            {bot.name} {botType}
+            {props.bot.name} {botType}
           </div>
 
           <div className="meta text-wrap">
-            <small>{bot.catchphrase}</small>
+            <small>{props.bot.catchphrase}</small>
           </div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat" />
-            {bot.health}
+            {props.bot.health}
           </span>
 
           <span>
             <i className="icon lightning" />
-            {bot.damage}
+            {props.bot.damage}
           </span>
           <span>
             <i className="icon shield" />
-            {bot.armor}
+            {props.bot.armor}
           </span>
         </div>
       </div>
