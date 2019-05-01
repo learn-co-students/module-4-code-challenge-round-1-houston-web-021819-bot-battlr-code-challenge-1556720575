@@ -17,7 +17,6 @@ class BotsPage extends React.Component {
     }))
   }
 
-
 	shiftBot = (bot, id) => {
 			if(bot.id === id){
         this.state.armyBots.push(bot)
@@ -29,9 +28,8 @@ class BotsPage extends React.Component {
 			} else{
 				return bot
 			}
-
 	}
-
+  
   render() {
     return (
       <div>

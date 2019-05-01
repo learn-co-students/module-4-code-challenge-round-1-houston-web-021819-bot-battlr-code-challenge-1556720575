@@ -23,10 +23,12 @@ const BotCard = props => {
     <div className="ui column">
       <div
         className="ui card"
-        key={bot.id}
+        id={bot.id}
         onClick={()=> 
-          {props.handleClick();
-          props.shiftBot(bot, bot.id)}
+          {
+            props.handleClick();
+            props.shiftBot(bot, bot.id);
+          }
         }
       >
         <div className="image">
